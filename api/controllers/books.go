@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	dataBase "booksapi/api/_db"
+	dataBase "booksapi/api/db"
 	"database/sql"
 	"log"
 	"strconv"
