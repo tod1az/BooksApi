@@ -19,25 +19,25 @@ type Result struct{
 
 func main(){
 	r := mux.NewRouter()
-    r.HandleFunc("/", homeHandler ).Methods("GET")
-    r.HandleFunc("/books", getBooksHandler).Methods("GET")
-    r.HandleFunc("/books/{id}", getBookHandler).Methods("GET")
-    r.HandleFunc("/books", createBookHandler).Methods("POST")
-    r.HandleFunc("/books/{id}", updateBookHandler).Methods("PUT")
-    r.HandleFunc("/books/{id}", deleteBookHandler).Methods("DELETE")
+    r.HandleFunc("/", HomeHandler ).Methods("GET")
+    r.HandleFunc("/books", GetBooksHandler).Methods("GET")
+    r.HandleFunc("/books/{id}", GetBookHandler).Methods("GET")
+    r.HandleFunc("/books", CreateBookHandler).Methods("POST")
+    r.HandleFunc("/books/{id}", UpdateBookHandler).Methods("PUT")
+    r.HandleFunc("/books/{id}", DeleteBookHandler).Methods("DELETE")
     http.ListenAndServe(":8000", r)
 }
 
-func homeHandler(w http.ResponseWriter, r *http.Request){
+func HomeHandler(w http.ResponseWriter, r *http.Request){
   json.NewEncoder(w).Encode("Hello world")
 }
 
 
-func getBooksHandler(w http.ResponseWriter, r *http.Request) {
+func GetBooksHandler(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(controllers.GetBooks())
 }
 
-func getBookHandler(w http.ResponseWriter, r *http.Request) {
+func GetBookHandler(w http.ResponseWriter, r *http.Request) {
     params := mux.Vars(r)
     book := controllers.GetBookById(params["id"])
     if book == nil {
@@ -51,7 +51,7 @@ func getBookHandler(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(book)
 }
 
-func createBookHandler(w http.ResponseWriter, r *http.Request) {
+func CreateBookHandler(w http.ResponseWriter, r *http.Request) {
     var book controllers.Book
     _ = json.NewDecoder(r.Body).Decode(&book)
    newId, err:= controllers.CreateBook(&book)
@@ -66,7 +66,7 @@ func createBookHandler(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(result)
 }
 
-func updateBookHandler(w http.ResponseWriter, r *http.Request) {
+func UpdateBookHandler(w http.ResponseWriter, r *http.Request) {
     params := mux.Vars(r)
     var newBook controllers.Book
     _ = json.NewDecoder(r.Body).Decode(&newBook)
@@ -80,7 +80,7 @@ func updateBookHandler(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(res)
 }
 
-func deleteBookHandler(w http.ResponseWriter, r *http.Request) {
+func DeleteBookHandler(w http.ResponseWriter, r *http.Request) {
     params := mux.Vars(r)
     newId, err:= controllers.DeleteBook(params["id"])
 
