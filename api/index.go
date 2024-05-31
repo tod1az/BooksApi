@@ -17,7 +17,7 @@ type Result struct{
   Message string `json:"message"`
 }
 
-func Main(){
+func main(){
 	r := mux.NewRouter()
     r.HandleFunc("/", homeHandler ).Methods("GET")
     r.HandleFunc("/books", getBooksHandler).Methods("GET")
