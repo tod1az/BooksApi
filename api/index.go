@@ -19,7 +19,6 @@ type Result struct{
 
 func Main(){
 	r := mux.NewRouter()
-    r.HandleFunc("/", HomeHandler ).Methods("GET")
     r.HandleFunc("/books", GetBooksHandler).Methods("GET")
     r.HandleFunc("/books/{id}", GetBookHandler).Methods("GET")
     r.HandleFunc("/books", CreateBookHandler).Methods("POST")
@@ -27,11 +26,6 @@ func Main(){
     r.HandleFunc("/books/{id}", DeleteBookHandler).Methods("DELETE")
     http.ListenAndServe(":8000", r)
 }
-
-func HomeHandler(w http.ResponseWriter, r *http.Request){
-  json.NewEncoder(w).Encode("Hello world")
-}
-
 
 func GetBooksHandler(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(controllers.GetBooks())
