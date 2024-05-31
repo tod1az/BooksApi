@@ -1,4 +1,4 @@
-package main
+package handler
 
 import (
 	controllers "booksapi/api/_controllers"
@@ -17,7 +17,7 @@ type Result struct{
   Message string `json:"message"`
 }
 
-func main(){
+func Main(){
 	r := mux.NewRouter()
     r.HandleFunc("/", HomeHandler ).Methods("GET")
     r.HandleFunc("/books", GetBooksHandler).Methods("GET")
