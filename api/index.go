@@ -1,7 +1,7 @@
 package main
 
 import (
-	"booksapi/api/controllers"
+	controllers "booksapi/api/_controllers"
 	"encoding/json"
 	"net/http"
 
