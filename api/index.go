@@ -1,7 +1,7 @@
 package handler
 
 import (
-	controllers "booksapi/api/controllers"
+	controllers "booksapi/controllers"
 	"encoding/json"
 	"net/http"
 
